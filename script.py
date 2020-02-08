@@ -8,14 +8,11 @@ d = defaultdict(list)
 graph = nx.Graph()
 
 for packet in packets:
-    graph.add_node(packet.src)
-    graph.add_node(packet.dst)
-    graph.add_edge(packet.src, packet.dst)
-    #d[packet.src].append(packet.dst)
-    #d[packet.dst].append(packet.src)
+    if IP in packet:
+#        print(packet[IP].src, packet[IP].dst)
+        graph.add_node(packet[IP].src)
+        graph.add_node(packet[IP].dst)
+        graph.add_edge(packet[IP].src, packet[IP].dst)
 
-#for key, value in d.items():
-#    print(key, ":", value)
 nx.draw(graph, with_labels=True)
 plt.savefig("sample.png")
-plt.show()
